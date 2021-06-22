@@ -1,5 +1,4 @@
 Feature: Test
 
   Scenario: Check functions
-    When I enter abc
-    Then I should result
+    Given I open app "C:\\DATA\\Working\\Build\\CodeITv4.15.0.10_Server\\"

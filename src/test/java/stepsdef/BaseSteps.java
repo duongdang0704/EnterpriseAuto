@@ -15,14 +15,10 @@ public class BaseSteps {
 
     private WindowsDriver driver;
     private TestContext testContext;
+
     public BaseSteps(TestContext testContext){
         this.testContext = testContext;
         driver = testContext.getDriver();
-    }
-
-    @Given("CodeIT app is open")
-    public void code_it_app_is_open() {
-
     }
 
     @When("I go to UDF Functions line screen")
@@ -39,4 +35,5 @@ public class BaseSteps {
             e.printStackTrace();
         }
     }
+
 }

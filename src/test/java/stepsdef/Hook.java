@@ -2,44 +2,46 @@ package stepsdef;
 
 import config.AppConfig;
 import cucumber.TestContext;
-import io.appium.java_client.windows.WindowsDriver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import pages.BaseWindow;
-import pages.ConfirmDialog;
+import pages.OverviewWindow;
+import testrunner.BarcodeRunner;
+import utilities.DataReader;
+import utilities.FileHandler;
 
-import java.net.URL;
-import java.util.concurrent.TimeUnit;
+import java.io.File;
+import java.io.IOException;
 
-public class Hook {
+
+import static org.apache.commons.io.FileUtils.*;
+
+public class Hook extends BarcodeRunner {
 
     private TestContext testContext;
-    private WindowsDriver driver;
     private BaseWindow baseWindow;
+    private OverviewWindow overviewWindow;
+    private DataReader config;
 
     public Hook(TestContext testContext){
         this.testContext = testContext;
+        testContext.setDriver(driver);
     }
 
     @Before
-    public void setup(){
-        try {
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setCapability("app", AppConfig.PATH);
-            capabilities.setCapability("platformName", "Windows");
-            capabilities.setCapability("deviceName", "WindowsPC");
-            driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
-            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        testContext.setDriver(driver);
-        baseWindow = new BaseWindow(driver);
+    public void setupHook(){
+
     }
 
-    @After
-    public void tearDown(){
-        baseWindow.closeApp();
+    @After("@Barcode")
+    public void tearDownBarcode() throws IOException {
+
+        String actualFileName = testContext.scenarioContext.getContext("Actual Printing File").toString();
+        String baselineFileName = testContext.scenarioContext.getContext("Baseline Printing File").toString();
+        boolean renameSuccess = FileHandler.rename(AppConfig.LOG_PRINTING_PATH + actualFileName, AppConfig.LOG_PRINTING_PATH + baselineFileName);
+        if (renameSuccess == true) {
+            copyFileToDirectory(new File(AppConfig.LOG_PRINTING_PATH + baselineFileName), new File(AppConfig.TESTDATA + testContext.scenarioContext.getContext("Printer").toString()));
+        }
     }
+
 }
