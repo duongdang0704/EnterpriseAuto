@@ -45,8 +45,10 @@ public class BarcodesSteps {
     public void i_enter_for_ai_for_label_path(String value, String labelPath) {
         testContext.scenarioContext.setContext("AI Value", value);
         testContext.scenarioContext.setContext("Label Path", labelPath);
-        barcodeWindow.enterInput1(value);
+
         barcodeWindow.enterLabelPath(labelPath);
+        barcodeWindow.enterInput1(value);
+
     }
 
     @When("I click Print")
@@ -60,7 +62,7 @@ public class BarcodesSteps {
         testContext.scenarioContext.setContext("Actual Printing File", actualFileName);
         testContext.scenarioContext.setContext("Baseline Printing File", baselineFileName);
         String actualFilePath = AppConfig.LOG_PRINTING_PATH + actualFileName;
-        String baselineFilePath = AppConfig.TESTDATA + "Baseline\\" + testContext.scenarioContext.getContext("Printer").toString() + "\\" + baselineFileName;
+        String baselineFilePath = AppConfig.TEST_DATA + "Baseline\\" + testContext.scenarioContext.getContext("Printer").toString() + "\\" + baselineFileName;
         try{
             String actualString = FileUtils.readFileToString(new File(actualFilePath), "UTF-8");
             String expectedString = FileUtils.readFileToString(new File(baselineFilePath), "UTF-8");

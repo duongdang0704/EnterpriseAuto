@@ -1,7 +1,6 @@
 package testrunner;
 
 import config.AppConfig;
-import cucumber.TestContext;
 import io.appium.java_client.windows.WindowsDriver;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
@@ -35,17 +34,19 @@ public class BarcodeRunner {
 
     @BeforeClass
     public static void setup(){
+        config = new DataReader();
+        config.loadFile(".\\src\\test\\config.properties");
+        AppConfig.loadConfig(config);
+        System.out.println(AppConfig.EXE_PATH);
         try{
             deleteDirectory(new File(AppConfig.LOG_PRINTING_PATH));
         }catch (IOException e){
             e.printStackTrace();
         }
-        config = new DataReader();
-        config.loadFile(".\\src\\test\\config.properties");
         if(driver == null){
             try {
                 DesiredCapabilities capabilities = new DesiredCapabilities();
-                capabilities.setCapability("app", config.getProperty("ApplicationPath"));
+                capabilities.setCapability("app", AppConfig.EXE_PATH);
                 capabilities.setCapability("platformName", "Windows");
                 capabilities.setCapability("deviceName", "WindowsPC");
                 driver = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);

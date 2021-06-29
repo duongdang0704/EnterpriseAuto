@@ -5,6 +5,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import pages.objects.Locator;
+import utilities.WaitFor;
 
 public class BaseWindow {
 
@@ -30,12 +31,25 @@ public class BaseWindow {
         driver.quit();
     }
 
+    public void waitForElementAttribute(Locator locator, String attributeName, String attributeValue){
+        String value = findElementByLocator(locator).getAttribute(attributeName);
+        int i = 0;
+        while(value.equals(attributeValue.toString())){
+            WaitFor.pause(1);
+            value = findElementByLocator(locator).getAttribute(attributeName);
+            i = i + 1;
+            if (i == 10){
+                break;
+            }
+        }
+    }
     public void enter(Locator locator, String value){
         WebElement element = findElementByLocator(locator);
         new Actions(driver).moveToElement(element).click().perform();
         element.sendKeys(Keys.CONTROL + "a");
         element.sendKeys(Keys.BACK_SPACE);
         element.sendKeys(value);
+        element.sendKeys(Keys.ENTER);
 
     }
 

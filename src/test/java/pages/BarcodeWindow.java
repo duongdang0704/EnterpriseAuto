@@ -24,6 +24,9 @@ public class BarcodeWindow extends BaseWindow{
         enter(input1_textbox, value);
     }
 
+    public void waitForLabelPreview(){
+        waitForElementAttribute(labelPreview_image, "BoundingRectangle", "Left:1240 Top:239 Width:18 Height:18");
+    }
     public void enterInput2(String value){
         enter(input2_textbox, value);
     }
@@ -46,6 +49,7 @@ public class BarcodeWindow extends BaseWindow{
 
     public void enterLabelPath(String value){
         enter(labelPath_textbox, value);
+        waitForLabelPreview();
     }
 
     public void clickPrint(){
