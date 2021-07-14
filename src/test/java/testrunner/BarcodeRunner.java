@@ -22,7 +22,7 @@ import static org.apache.commons.io.FileUtils.deleteDirectory;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/resources/features/Barcodes.feature",
+        features = "src/test/resources/features/GS1-AI00-30.feature",
         glue = "stepsdef",
         plugin = {"html:target/cucumber-reports/cucumber.html",
                 "json:target/cucumber-reports/cucumber.json"}

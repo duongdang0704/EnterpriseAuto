@@ -49,7 +49,7 @@ public class BaseWindow {
         element.sendKeys(Keys.CONTROL + "a");
         element.sendKeys(Keys.BACK_SPACE);
         element.sendKeys(value);
-        element.sendKeys(Keys.ENTER);
+        new Actions(driver).moveToElement(element).click().perform();
 
     }
 
