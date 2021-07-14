@@ -53,6 +53,7 @@ public class BarcodesSteps {
 
     @When("I click Print")
     public void i_click_print() {
+        WaitFor.pause(10);
         barcodeWindow.clickPrint();
         WaitFor.pause(5);
     }

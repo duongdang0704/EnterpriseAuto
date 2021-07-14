@@ -18,5 +18,4 @@ public class BarcodeSatoWindow extends BarcodeWindow{
         title_textbox = new Locator(Locator.By.AccessibilityId, "5a5ef852-bc0a-4631-8bbe-2db4d20ed64e");
     }
 
-
 }
