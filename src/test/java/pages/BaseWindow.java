@@ -1,11 +1,14 @@
 package pages;
 
 import io.appium.java_client.windows.WindowsDriver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import pages.objects.Locator;
 import utilities.WaitFor;
+
+import java.util.List;
 
 public class BaseWindow {
 
@@ -55,5 +58,15 @@ public class BaseWindow {
 
     public void click(Locator locator){
         findElementByLocator(locator).click();
+    }
+
+    public void selectCbbOption(Locator locator, String option) {
+        WebElement elm = findElementByLocator(locator);
+        elm.click();
+        List<WebElement> items = elm.findElements(By.className("ListBoxItem"));
+        for (WebElement item : items) {
+            if (option.equals(item.getAttribute("Name")))
+                item.click();
+        }
     }
 }

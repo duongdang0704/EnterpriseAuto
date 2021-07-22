@@ -2,35 +2,35 @@ package stepsdef;
 
 import config.AppConfig;
 import cucumber.TestContext;
-import io.appium.java_client.windows.WindowsDriver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import pages.BaseWindow;
 import pages.OverviewWindow;
-import testrunner.BarcodeRunner;
+import testrunner.TestRunner;
 import utilities.DataReader;
 import utilities.FileHandler;
-import utilities.WaitFor;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.concurrent.TimeUnit;
 
 
 import static org.apache.commons.io.FileUtils.*;
 
-public class Hook extends BarcodeRunner {
+public class Hook extends TestRunner {
 
     private TestContext testContext;
     private BaseWindow baseWindow;
     private OverviewWindow overviewWindow;
-    private DataReader config;
 
     public Hook(TestContext testContext){
         this.testContext = testContext;
         testContext.setDriver(driver);
+        overviewWindow = new OverviewWindow(driver);
+    }
+
+    @Before("@Barcode")
+    public void setupHookBarcode(){
+        overviewWindow.selectProductionLine("Sato");
     }
 
     @Before

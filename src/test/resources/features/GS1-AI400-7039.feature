@@ -21,7 +21,7 @@ Feature: GS1 barcode
       | Sato | 401 | TC AI401 02 Valid: Empty |  | .\Labels\BarcodeAI401.xml   | TC_AI401_02.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 401 | TC AI401 03 Valid: Less than 30 characters and no checksum | X%x98745612301234567896541230 | .\Labels\BarcodeAI401.xml   | TC_AI401_03.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 401 | TC AI401 04 Valid: 30 characters and checksum | X%x987456123012345678965412302 | .\Labels\BarcodeAI401_Checksum.xml   | TC_AI401_04.txt | G0L1EPrinter.SATO_Printerdata.txt |
-      | Sato | 401 | TC AI401 04 Valid: 29 characters and checksum | X%x98745612301234567896541230 | .\Labels\BarcodeAI401_Checksum.xml   | TC_AI401_04.txt | G0L1EPrinter.SATO_Printerdata.txt |
+#      | Sato | 401 | TC AI401 05 Valid: 29 characters and checksum | X%x98745612301234567896541230 | .\Labels\BarcodeAI401_Checksum.xml   | TC_AI401_05.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 402 | TC AI402 01 Invalid: Less than 17 digits | 1234567890123456 | .\Labels\BarcodeAI402.xml   | TC_AI402_01.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 402 | TC AI402 02 Invalid: Empty |  | .\Labels\BarcodeAI402.xml   | TC_AI402_02.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 402 | TC AI402 03 Invalid: 15 digits and checksum | 123456789012345 | .\Labels\BarcodeAI402_Checksum.xml   | TC_AI402_03.txt | G0L1EPrinter.SATO_Printerdata.txt |
