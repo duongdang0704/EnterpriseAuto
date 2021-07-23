@@ -10,6 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import pages.BaseWindow;
+import pages.OverviewWindow;
 import utilities.DataReader;
 import utilities.WaitFor;
 
@@ -22,29 +23,30 @@ import static org.apache.commons.io.FileUtils.deleteDirectory;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/resources/features/UDFLogicalFunctions.feature",
-        glue = "stepsdef",
+        features = "src/test/resources/features",
+        glue = {"stepsdef","hooks/BarcodeHook"},
+        tags = "@Barcode",
         plugin = {"html:target/cucumber-reports/cucumber.html",
                 "json:target/cucumber-reports/cucumber.json"}
 )
-public class TestRunner {
+public class BarcodeRunner {
 
     public static WindowsDriver driver;
     public static DataReader config;
 
 
     @BeforeClass()
-    public static void setup(){
+    public static void setup() {
         config = new DataReader();
         config.loadFile(".\\src\\test\\config.properties");
         AppConfig.loadConfig(config);
         System.out.println(AppConfig.EXE_PATH);
-        try{
+        try {
             deleteDirectory(new File(AppConfig.LOG_PRINTING_PATH));
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        if(driver == null){
+        if (driver == null) {
             try {
                 DesiredCapabilities capabilities = new DesiredCapabilities();
                 capabilities.setCapability("app", AppConfig.EXE_PATH);
@@ -60,11 +62,13 @@ public class TestRunner {
             }
 
         }
+        OverviewWindow overviewWindow = new OverviewWindow(driver);
+        overviewWindow.selectProductionLine("Sato");
 
     }
 
     @AfterClass
-    public static void tearDown(){
+    public static void tearDown() {
         BaseWindow baseWindow = new BaseWindow(driver);
         baseWindow.closeApp();
     }

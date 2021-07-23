@@ -1,3 +1,4 @@
+@UDFFunctions
 Feature: UDF Table Function
 
   Scenario Outline: Check UDF Table Functions

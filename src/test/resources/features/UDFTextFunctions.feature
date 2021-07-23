@@ -1,3 +1,4 @@
+@UDFFunctions
 Feature: UDF Text Functions
   Scenario Outline: Check UDF Text Functions
     Given I go to UDF Text Line Screen

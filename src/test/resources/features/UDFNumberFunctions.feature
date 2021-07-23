@@ -1,3 +1,4 @@
+@UDFFunctions
 Feature: UDF Number Functions
 
   Scenario Outline: Check Random function

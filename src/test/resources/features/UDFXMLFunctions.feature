@@ -1,3 +1,4 @@
+@UDFFunctions
 Feature: UDF XML Function
   Scenario Outline: Check XML Functions
     Given I go to UDF XML Line Screen

@@ -1,3 +1,4 @@
+@UDFFunctions
 Feature: UDF Json Functions
   Scenario Outline: Check Json Functions
     Given I go to UDF Json Line Screen

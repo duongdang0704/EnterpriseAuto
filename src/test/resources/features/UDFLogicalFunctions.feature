@@ -1,3 +1,4 @@
+@UDFFunctions
 Feature: UDF Logical Functions
   Scenario Outline: Check UDF Logical Functions
     Given I go to UDF Logical Line Screen
