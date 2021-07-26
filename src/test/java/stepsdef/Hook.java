@@ -2,38 +2,45 @@ package stepsdef;
 
 import config.AppConfig;
 import cucumber.TestContext;
+import io.appium.java_client.windows.WindowsDriver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import pages.BaseWindow;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import pages.OverviewWindow;
-import testrunner.UDFFunctionRunner;
+import utilities.DataReader;
+import utilities.DriverFactory;
 import utilities.FileHandler;
+import utilities.WaitFor;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 
 import static org.apache.commons.io.FileUtils.*;
 
-public class Hook extends UDFFunctionRunner {
+public class Hook {
 
     private TestContext testContext;
-    private BaseWindow baseWindow;
-    private OverviewWindow overviewWindow;
+    private WindowsDriver driver;
 
     public Hook(TestContext testContext){
         this.testContext = testContext;
-        testContext.setDriver(driver);
-        overviewWindow = new OverviewWindow(driver);
+
     }
 
     @Before("@Barcode")
     public void setupHookBarcode(){
+        OverviewWindow overviewWindow = new OverviewWindow(driver);
         overviewWindow.selectProductionLine("Sato");
     }
 
     @Before
     public void setupHook(){
+        driver = DriverFactory.getDriver(40);
+        testContext.setDriver(driver);
 
     }
 
@@ -46,6 +53,10 @@ public class Hook extends UDFFunctionRunner {
         if (renameSuccess == true) {
             copyFileToDirectory(new File(AppConfig.LOG_PRINTING_PATH + baselineFileName), new File(AppConfig.TEST_DATA + testContext.scenarioContext.getContext("Printer").toString()));
         }
+    }
+    @After
+    public void tearDown(){
+
     }
 
 }
