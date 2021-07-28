@@ -8,9 +8,11 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import pages.BaseWindow;
+import pages.OverviewWindow;
 import utilities.DataReader;
 import utilities.DriverFactory;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
@@ -18,7 +20,7 @@ import static org.apache.commons.io.FileUtils.deleteDirectory;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/resources/features/GS1-AI00-30.feature",
+        features = "src/test/resources/features",
         glue = {"stepsdef"},
         tags = "@Barcode",
         plugin = {"html:target/cucumber-reports/cucumber.html",
@@ -28,7 +30,9 @@ public class BarcodeRunner {
 
     @BeforeClass
     public static void startApp(){
-        DriverFactory.createDriver(40);
+        WindowsDriver driver = DriverFactory.createDriver(15);
+        OverviewWindow overviewWindow = new OverviewWindow(driver);
+        overviewWindow.selectProductionLine("Sato");
     }
 
     @AfterClass()

@@ -1,4 +1,4 @@
-@UDFFunctions
+@UDFFunctions, @DateTime
 Feature: UDF DateTime Functions
   Scenario Outline: Check UDF Datetime Functions
     Given I go to UDF DateTime Line Screen

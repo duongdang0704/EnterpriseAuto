@@ -15,7 +15,7 @@ public class AppConfig {
         EXE_PATH = ROOT_PATH + "CodeIT.exe";
         PROJECT_PATH = ROOT_PATH + config.getProperty("PROJECT_NAME") + "\\";
         LOG_PRINTING_PATH = ROOT_PATH + "Log\\Printing\\";
-        TEST_DATA = PROJECT_PATH + "Project\\Data\\";
+        TEST_DATA = ROOT_PATH + "TestData\\";
     }
 
 }

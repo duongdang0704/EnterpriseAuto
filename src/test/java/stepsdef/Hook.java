@@ -33,8 +33,12 @@ public class Hook {
 
     @Before("@Barcode")
     public void setupHookBarcode(){
-        OverviewWindow overviewWindow = new OverviewWindow(driver);
-        overviewWindow.selectProductionLine("Sato");
+
+    }
+
+    @Before("@UDFFunctions")
+    public void setupUDFFunctions(){
+
     }
 
     @Before

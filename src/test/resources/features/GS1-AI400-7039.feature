@@ -1,10 +1,10 @@
 @Barcode
-Feature: GS1 barcode
+Feature: GS1 barcode AIs 400 -> 7039
 
 #Background:
 #  Given CodeIT app is open "C:\\DATA\\Working\\Build\\CodeITv4.15.0.10_Server\\"
 
-  Scenario Outline: Check AIs in GS1 barcode on Printers
+  Scenario Outline: Check AIs(400 -> 7039) in GS1 barcode on Printers
     Given I am on "<Printer>" screen
     When I want to check "<AI>" with "<Scenario>"
     And I enter "<AI Value>" for AI, "<Label Path>" for LabelPath
@@ -21,7 +21,7 @@ Feature: GS1 barcode
       | Sato | 401 | TC AI401 02 Valid: Empty |  | .\Labels\BarcodeAI401.xml   | TC_AI401_02.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 401 | TC AI401 03 Valid: Less than 30 characters and no checksum | X%x98745612301234567896541230 | .\Labels\BarcodeAI401.xml   | TC_AI401_03.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 401 | TC AI401 04 Valid: 30 characters and checksum | X%x987456123012345678965412302 | .\Labels\BarcodeAI401_Checksum.xml   | TC_AI401_04.txt | G0L1EPrinter.SATO_Printerdata.txt |
-#      | Sato | 401 | TC AI401 05 Valid: 29 characters and checksum | X%x98745612301234567896541230 | .\Labels\BarcodeAI401_Checksum.xml   | TC_AI401_05.txt | G0L1EPrinter.SATO_Printerdata.txt |
+      | Sato | 401 | TC AI401 05 Valid: 29 characters and checksum | X%x98745612301234567896541230 | .\Labels\BarcodeAI401_Checksum.xml   | TC_AI401_05.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 402 | TC AI402 01 Invalid: Less than 17 digits | 1234567890123456 | .\Labels\BarcodeAI402.xml   | TC_AI402_01.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 402 | TC AI402 02 Invalid: Empty |  | .\Labels\BarcodeAI402.xml   | TC_AI402_02.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 402 | TC AI402 03 Invalid: 15 digits and checksum | 123456789012345 | .\Labels\BarcodeAI402_Checksum.xml   | TC_AI402_03.txt | G0L1EPrinter.SATO_Printerdata.txt |
@@ -97,7 +97,7 @@ Feature: GS1 barcode
       | Sato | 422 | TC AI422 02 Invalid: Empty |  | .\Labels\BarcodeAI422.xml   | TC_AI422_02.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 422 | TC AI422 03 Invalid: Less than 3 digits | 12 | .\Labels\BarcodeAI422.xml   | TC_AI422_03.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 422 | TC AI422 04 Invalid: Not number | X%x | .\Labels\BarcodeAI422.xml   | TC_AI422_04.txt | G0L1EPrinter.SATO_Printerdata.txt |
-      | Sato | 422 | TC AI422 04 Valid: 3 digits | 012 | .\Labels\BarcodeAI422.xml   | TC_AI422_04.txt | G0L1EPrinter.SATO_Printerdata.txt |
+      | Sato | 422 | TC AI422 05 Valid: 3 digits | 012 | .\Labels\BarcodeAI422.xml   | TC_AI422_05.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 423 | TC AI423 01 Invalid: less than 3 digits | 12 | .\Labels\BarcodeAI423.xml   | TC_AI423_01.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 423 | TC AI423 02 Invalid: Empty |  | .\Labels\BarcodeAI423.xml   | TC_AI423_02.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 423 | TC AI423 03 Invalid: 3 prefix is not number | X%x | .\Labels\BarcodeAI423.xml   | TC_AI423_03.txt | G0L1EPrinter.SATO_Printerdata.txt |
@@ -110,7 +110,7 @@ Feature: GS1 barcode
       | Sato | 424 | TC AI424 02 Invalid: Empty |  | .\Labels\BarcodeAI424.xml   | TC_AI424_02.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 424 | TC AI424 03 Invalid: Less than 3 digits | 12 | .\Labels\BarcodeAI424.xml   | TC_AI424_03.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 424 | TC AI424 04 Invalid: Not number | X%x | .\Labels\BarcodeAI424.xml   | TC_AI424_04.txt | G0L1EPrinter.SATO_Printerdata.txt |
-      | Sato | 424 | TC AI424 04 Valid: 3 digits | 012 | .\Labels\BarcodeAI424.xml   | TC_AI424_04.txt | G0L1EPrinter.SATO_Printerdata.txt |
+      | Sato | 424 | TC AI424 05 Valid: 3 digits | 012 | .\Labels\BarcodeAI424.xml   | TC_AI424_05.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 425 | TC AI425 01 Invalid: less than 3 digits | 12 | .\Labels\BarcodeAI425.xml   | TC_AI425_01.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 425 | TC AI425 02 Invalid: Empty |  | .\Labels\BarcodeAI425.xml   | TC_AI425_02.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 425 | TC AI425 03 Invalid: 3 prefix is not number | X%x | .\Labels\BarcodeAI425.xml   | TC_AI425_03.txt | G0L1EPrinter.SATO_Printerdata.txt |
@@ -123,7 +123,7 @@ Feature: GS1 barcode
       | Sato | 426 | TC AI426 02 Invalid: Empty |  | .\Labels\BarcodeAI426.xml   | TC_AI426_02.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 426 | TC AI426 03 Invalid: Less than 3 digits | 12 | .\Labels\BarcodeAI426.xml   | TC_AI426_03.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 426 | TC AI426 04 Invalid: Not number | X%x | .\Labels\BarcodeAI426.xml   | TC_AI426_04.txt | G0L1EPrinter.SATO_Printerdata.txt |
-      | Sato | 426 | TC AI426 04 Valid: 3 digits | 012 | .\Labels\BarcodeAI426.xml   | TC_AI426_04.txt | G0L1EPrinter.SATO_Printerdata.txt |
+      | Sato | 426 | TC AI426 05 Valid: 3 digits | 012 | .\Labels\BarcodeAI426.xml   | TC_AI426_05.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 427 | TC AI427 01 Invalid: More than 3 characters | 1123 | .\Labels\BarcodeAI427.xml   | TC_AI427_01.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 427 | TC AI427 02 Valid: Empty |  | .\Labels\BarcodeAI427.xml   | TC_AI427_02.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 427 | TC AI427 03 Valid: Less than 3 characters | X% | .\Labels\BarcodeAI427.xml   | TC_AI427_03.txt | G0L1EPrinter.SATO_Printerdata.txt |
@@ -132,7 +132,7 @@ Feature: GS1 barcode
       | Sato | 7001 | TC AI7001 02 Invalid: Empty |  | .\Labels\BarcodeAI7001.xml   | TC_AI7001_02.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 7001 | TC AI7001 03 Invalid: Less than 13 digits | 123456789123 | .\Labels\BarcodeAI7001.xml   | TC_AI7001_03.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 7001 | TC AI7001 04 Valid: 13 digits | 1234567891234 | .\Labels\BarcodeAI7001.xml   | TC_AI7001_04.txt | G0L1EPrinter.SATO_Printerdata.txt |
-      | Sato | 7001 | TC AI7001 04 Invalid: Not number | 123456789123E | .\Labels\BarcodeAI7001.xml   | TC_AI7001_05.txt | G0L1EPrinter.SATO_Printerdata.txt |
+      | Sato | 7001 | TC AI7001 05 Invalid: Not number | 123456789123E | .\Labels\BarcodeAI7001.xml   | TC_AI7001_05.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 7002 | TC AI7002 01 Invalid: More than 30 characters | X%x98745612301234iuy1234567890R | .\Labels\BarcodeAI7002.xml   | TC_AI7002_01.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 7002 | TC AI7002 02 Valid: Empty |  | .\Labels\BarcodeAI7002.xml   | TC_AI7002_02.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 7002 | TC AI7002 03 Valid: Less than 30 characters | QWERTY | .\Labels\BarcodeAI7002.xml   | TC_AI7002_03.txt | G0L1EPrinter.SATO_Printerdata.txt |
@@ -155,7 +155,7 @@ Feature: GS1 barcode
       | Sato | 7006 | TC AI7006 02 Valid: Empty |  | .\Labels\BarcodeAI7006.xml   | TC_AI7006_02.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 7006 | TC AI7006 03 Valid: Less than 6 digits | 12345 | .\Labels\BarcodeAI7006.xml   | TC_AI7006_03.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 7006 | TC AI7006 04 Valid: 6 digits | 123456 | .\Labels\BarcodeAI7006.xml   | TC_AI7006_04.txt | G0L1EPrinter.SATO_Printerdata.txt |
-      | Sato | 7006 | TC AI7006 05 Valid: Not number | 1234ee | .\Labels\BarcodeAI7006.xml   | TC_AI7006_05.txt | G0L1EPrinter.SATO_Printerdata.txt |
+      | Sato | 7006 | TC AI7006 05 Invalid: Not number | 1234ee | .\Labels\BarcodeAI7006.xml   | TC_AI7006_05.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 7007 | TC AI7007 01 Invalid: less than 36 digits | 12345 | .\Labels\BarcodeAI7007.xml   | TC_AI7007_01.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 7007 | TC AI7007 02 Invalid: Empty |  | .\Labels\BarcodeAI7007.xml   | TC_AI7007_02.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 7007 | TC AI7007 03 Invalid: 6 prefix is not number | X%x123 | .\Labels\BarcodeAI7007.xml   | TC_AI7007_03.txt | G0L1EPrinter.SATO_Printerdata.txt |

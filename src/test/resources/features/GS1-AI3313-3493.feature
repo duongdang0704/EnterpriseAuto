@@ -1,10 +1,10 @@
 @Barcode
-Feature: GS1 barcode
+Feature: GS1 barcode AIs 3313 -> 3493
 
 #Background:
 #  Given CodeIT app is open "C:\\DATA\\Working\\Build\\CodeITv4.15.0.10_Server\\"
 
-  Scenario Outline: Check AIs in GS1 barcode on Printers
+  Scenario Outline: Check AIs(AI3313 -> 3493) in GS1 barcode on Printers
     Given I am on "<Printer>" screen
     When I want to check "<AI>" with "<Scenario>"
     And I enter "<AI Value>" for AI, "<Label Path>" for LabelPath

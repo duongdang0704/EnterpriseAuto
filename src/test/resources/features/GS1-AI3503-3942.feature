@@ -1,10 +1,10 @@
 @Barcode
-Feature: GS1 barcode
+Feature: GS1 barcode AIs 3503 -> 3942
 
 #Background:
 #  Given CodeIT app is open "C:\\DATA\\Working\\Build\\CodeITv4.15.0.10_Server\\"
 
-  Scenario Outline: Check AIs in GS1 barcode on Printers
+  Scenario Outline: Check AIs(3503 -> 3942) in GS1 barcode on Printers
     Given I am on "<Printer>" screen
     When I want to check "<AI>" with "<Scenario>"
     And I enter "<AI Value>" for AI, "<Label Path>" for LabelPath
@@ -195,8 +195,8 @@ Feature: GS1 barcode
       | Sato | 3913 | TC AI3913 06 Valid: Count(number * 1000) < 18 | 123456789876 | .\Labels\BarcodeAI3913.xml   | TC_AI3913_06.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 3913 | TC AI3913 07 Valid: Round number | 123456789876543.2123 | .\Labels\BarcodeAI3913.xml   | TC_AI3913_07.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 3913 | TC AI3913 08 Valid: Round up number | 123456789876543.21255 | .\Labels\BarcodeAI3913.xml   | TC_AI3913_08.txt | G0L1EPrinter.SATO_Printerdata.txt |
-      | Sato | 3913 | TC AI3913 08 Valid: Remove prefix 0 | 00123456789123456 | .\Labels\BarcodeAI3913.xml   | TC_AI3913_09.txt | G0L1EPrinter.SATO_Printerdata.txt |
-      | Sato | 3913 | TC AI3913 08 Invalid: Not number | abc | .\Labels\BarcodeAI3913.xml   | TC_AI3913_09.txt | G0L1EPrinter.SATO_Printerdata.txt |
+      | Sato | 3913 | TC AI3913 09 Valid: Remove prefix 0 | 00123456789123456 | .\Labels\BarcodeAI3913.xml   | TC_AI3913_09.txt | G0L1EPrinter.SATO_Printerdata.txt |
+      | Sato | 3913 | TC AI3913 10 Invalid: Not number | abc | .\Labels\BarcodeAI3913.xml   | TC_AI3913_10.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 3923 | TC AI3923 01 Invalid: Count(number * 1000) > 15 | 1234567898762 | .\Labels\BarcodeAI3923.xml   | TC_AI3923_01.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 3923 | TC AI3923 02 Valid: Empty |  | .\Labels\BarcodeAI3923.xml   | TC_AI3923_02.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 3923 | TC AI3923 03 Valid: Count(number * 1000) = 15 | 123456789876 | .\Labels\BarcodeAI3923.xml   | TC_AI3923_03.txt | G0L1EPrinter.SATO_Printerdata.txt |
@@ -212,8 +212,8 @@ Feature: GS1 barcode
       | Sato | 3933 | TC AI3933 06 Valid: Count(number * 1000) < 18 | 123456789876 | .\Labels\BarcodeAI3933.xml   | TC_AI3933_06.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 3933 | TC AI3933 07 Valid: Round number | 123456789876543.2123 | .\Labels\BarcodeAI3933.xml   | TC_AI3933_07.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 3933 | TC AI3933 08 Valid: Round up number | 123456789876543.21255 | .\Labels\BarcodeAI3933.xml   | TC_AI3933_08.txt | G0L1EPrinter.SATO_Printerdata.txt |
-      | Sato | 3933 | TC AI3933 08 Valid: Remove prefix 0 | 00123456789123456 | .\Labels\BarcodeAI3933.xml   | TC_AI3933_09.txt | G0L1EPrinter.SATO_Printerdata.txt |
-      | Sato | 3933 | TC AI3933 08 Invalid: Not number | abc | .\Labels\BarcodeAI3933.xml   | TC_AI3933_09.txt | G0L1EPrinter.SATO_Printerdata.txt |
+      | Sato | 3933 | TC AI3933 09 Valid: Remove prefix 0 | 00123456789123456 | .\Labels\BarcodeAI3933.xml   | TC_AI3933_09.txt | G0L1EPrinter.SATO_Printerdata.txt |
+      | Sato | 3933 | TC AI3933 10 Invalid: Not number | abc | .\Labels\BarcodeAI3933.xml   | TC_AI3933_10.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 3942 | TC AI3942 01 Invalid: Count(number * 100) > 4 | 122 | .\Labels\BarcodeAI3942.xml   | TC_AI3942_01.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 3942 | TC AI3942 02 Invalid: Empty |  | .\Labels\BarcodeAI3942.xml   | TC_AI3942_02.txt | G0L1EPrinter.SATO_Printerdata.txt |
       | Sato | 3942 | TC AI3942 03 Valid: Count(number * 100) < 4 | 1 | .\Labels\BarcodeAI3942.xml   | TC_AI3942_03.txt | G0L1EPrinter.SATO_Printerdata.txt |
