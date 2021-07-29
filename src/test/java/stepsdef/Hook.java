@@ -5,11 +5,11 @@ import cucumber.TestContext;
 import io.appium.java_client.windows.WindowsDriver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import pages.BaseWindow;
 import pages.OverviewWindow;
-import testrunner.BarcodeRunner;
 import utilities.DataReader;
+import utilities.DriverFactory;
 import utilities.FileHandler;
 import utilities.WaitFor;
 
@@ -21,20 +21,30 @@ import java.util.concurrent.TimeUnit;
 
 import static org.apache.commons.io.FileUtils.*;
 
-public class Hook extends BarcodeRunner {
+public class Hook {
 
     private TestContext testContext;
-    private BaseWindow baseWindow;
-    private OverviewWindow overviewWindow;
-    private DataReader config;
+    private WindowsDriver driver;
 
     public Hook(TestContext testContext){
         this.testContext = testContext;
-        testContext.setDriver(driver);
+
+    }
+
+    @Before("@Barcode")
+    public void setupHookBarcode(){
+
+    }
+
+    @Before("@UDFFunctions")
+    public void setupUDFFunctions(){
+
     }
 
     @Before
     public void setupHook(){
+        driver = DriverFactory.getDriver(40);
+        testContext.setDriver(driver);
 
     }
 
@@ -47,6 +57,10 @@ public class Hook extends BarcodeRunner {
         if (renameSuccess == true) {
             copyFileToDirectory(new File(AppConfig.LOG_PRINTING_PATH + baselineFileName), new File(AppConfig.TEST_DATA + testContext.scenarioContext.getContext("Printer").toString()));
         }
+    }
+    @After
+    public void tearDown(){
+
     }
 
 }

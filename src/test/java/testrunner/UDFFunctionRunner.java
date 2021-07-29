@@ -8,11 +8,9 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import pages.BaseWindow;
-import pages.OverviewWindow;
 import utilities.DataReader;
 import utilities.DriverFactory;
 
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
@@ -20,29 +18,22 @@ import static org.apache.commons.io.FileUtils.deleteDirectory;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/resources/features",
+        features = "src/test/resources/features/UDFDateTimeFunctions.feature",
         glue = {"stepsdef"},
-        tags = "@Barcode",
+        tags = "@UDFFunctions",
         plugin = {"html:target/cucumber-reports/cucumber.html",
                 "json:target/cucumber-reports/cucumber.json"}
 )
-public class BarcodeRunner {
+public class UDFFunctionRunner {
 
     @BeforeClass
     public static void startApp(){
-        WindowsDriver driver = DriverFactory.createDriver(15);
-        OverviewWindow overviewWindow = new OverviewWindow(driver);
-        overviewWindow.selectProductionLine("Sato");
+        DriverFactory.createDriver(10);
     }
 
     @AfterClass()
     public static void quitApp(){
-        try {
-            deleteDirectory(new File(AppConfig.LOG_PRINTING_PATH));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        BaseWindow baseWindow = new BaseWindow(DriverFactory.getDriver(40));
+        BaseWindow baseWindow = new BaseWindow(DriverFactory.getDriver(10));
         baseWindow.closeApp();
         DriverFactory.deleteDriver();
     }

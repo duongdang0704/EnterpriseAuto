@@ -28,7 +28,7 @@
                     </systemPropertyVariables>
                     <testFailureIgnore>true</testFailureIgnore>
                     <includes>
-                        <include>**/*Runner.java</include>
+                        <include>**/BarcodeRunner.java</include>
                     </includes>
                 </configuration>
             </plugin>
@@ -44,7 +44,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <projectName>eMRB Auto Test</projectName>
+                            <projectName>Enterprise Auto Test</projectName>
                             <outputDirectory>target/reports/html-reports</outputDirectory>
                             <inputDirectory>target/cucumber-reports</inputDirectory>
                             <jsonFiles>
@@ -94,12 +94,5 @@
             <artifactId>java-client</artifactId>
             <version>7.5.1</version>
         </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>RELEASE</version>
-            <scope>test</scope>
-        </dependency>
-
     </dependencies>
 </project>
