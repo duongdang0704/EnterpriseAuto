@@ -69,4 +69,9 @@ public class BaseWindow {
                 item.click();
         }
     }
+
+    public String getText(Locator locator){
+        WebElement elm = findElementByLocator(locator);
+        return elm.getText();
+    }
 }

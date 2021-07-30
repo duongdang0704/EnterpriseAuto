@@ -5,6 +5,7 @@ import io.appium.java_client.windows.WindowsDriver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import pages.OverviewWindow;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,9 +22,10 @@ public class BaseSteps {
         driver = testContext.getDriver();
     }
 
-    @When("I go to UDF Functions line screen")
-    public void i_go_to_udf_functions_line_screen() {
-
+    @When("I go to line screen {string}")
+    public void i_go_to_line_screen(String line) {
+        OverviewWindow overviewWindow = new OverviewWindow(driver);
+        overviewWindow.selectProductionLine(line);
     }
 
     public void writeFileSource(String path, String content){
