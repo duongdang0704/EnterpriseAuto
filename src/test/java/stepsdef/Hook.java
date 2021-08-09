@@ -43,7 +43,7 @@ public class Hook {
 
     @Before
     public void setupHook(){
-        driver = DriverFactory.getDriver(40);
+        driver = DriverFactory.getDriver(10);
         testContext.setDriver(driver);
 
     }

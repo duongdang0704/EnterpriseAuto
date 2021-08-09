@@ -1,5 +1,9 @@
 package utilities;
 
+import org.w3c.dom.Document;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,11 +13,11 @@ import java.util.Properties;
 public class DataReader {
     private Properties prop;
 
-    public void loadFile(String fileName) {
+    public void loadFile(String filePath) {
         prop = new Properties();
         final InputStream inputStream;
         try {
-            inputStream = new FileInputStream(fileName);
+            inputStream = new FileInputStream(filePath);
             try {
                 prop.load(inputStream);
                 inputStream.close();
@@ -28,4 +32,18 @@ public class DataReader {
     public String getProperty(String property) {
         return prop.getProperty(property);
     }
+
+    public Document getXMLDocument(String filePath) {
+        Document doc = null;
+        try {
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            doc = dBuilder.parse(filePath);
+            doc.getDocumentElement().normalize();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return doc;
+    }
+
 }

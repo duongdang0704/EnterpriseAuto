@@ -6,7 +6,10 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -21,6 +24,15 @@ public class DriverFactory {
             DataReader config = new DataReader();
             config.loadFile(".\\src\\test\\config.properties");
             AppConfig.loadConfig(config);
+            //Clear log files
+            File logFolder = new File(AppConfig.LOG_APPLICATION);
+            File[] logFiles = logFolder.listFiles();
+            for (File logFile: logFiles
+            ) {
+                if(logFile.getName().endsWith(".xml")){
+                    logFile.delete();
+                }
+            }
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("app", AppConfig.EXE_PATH);
             capabilities.setCapability("platformName", "Windows");

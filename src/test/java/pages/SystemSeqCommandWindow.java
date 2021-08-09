@@ -22,6 +22,7 @@ public class SystemSeqCommandWindow extends BaseWindow{
     private Locator moveFile_button = new Locator(Locator.By.Name, "MoveFile");
     private Locator playSound_button = new Locator(Locator.By.Name, "PlaySound");
     private Locator setCursor_button = new Locator(Locator.By.Name, "SetCursor");
+    private Locator warningLog_icon = new Locator(Locator.By.Xpath, "//Text[@HelpText=\"Log\"]");
 
     public SystemSeqCommandWindow(WindowsDriver driver){
         super(driver);
@@ -85,5 +86,9 @@ public class SystemSeqCommandWindow extends BaseWindow{
 
     public void clickSetCursor(){
         click(setCursor_button);
+    }
+
+    public void clickWarningLog(){
+        click(warningLog_icon);
     }
 }
