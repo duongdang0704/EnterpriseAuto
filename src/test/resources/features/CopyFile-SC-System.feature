@@ -1,4 +1,4 @@
-@Commands
+@SequenceCommands
 Feature: Sequence commands in System group
 
   Background: System sequence screen is open
@@ -6,7 +6,7 @@ Feature: Sequence commands in System group
 
   Scenario Outline: Copy file successfully when destination folder is available
     Given Source file "<SourceFolder>", destination folder "<DestinationFolder>" exists
-    When I enter TC "<TC>", source file "<SourceFile>", destination file "<DestinationFile>", DoCreateDir "<DoCreateDir>"
+    When I enter "<TC>", "<SourceFile>", "<DestinationFile>", "<DoCreateDir>"
     And I click CopyFile
     Then I should see the file exists "<CopiedFile>"
 
@@ -20,38 +20,38 @@ Feature: Sequence commands in System group
 
   Scenario: Copy multiple files by wildcard successfully when destination folder is available
     Given Source file "C:\Source", destination folder "C:\Destination" exists
-    When I enter TC "Copy all text files from source to destination, copy wildcard extension", source file "C:\Source\*.xml", destination file "C:\Destination", DoCreateDir ""
+    When I enter "Copy all text files from source to destination, copy wildcard extension", "C:\Source\*.xml", "C:\Destination", ""
     And I click CopyFile
-    Then I should see all text files exist
+    Then I should see all files match pattern "C:\Source\*.xml" exist in "C:\Destination"
 
   Scenario: Copy all files in folder successfully when destination folder is available
     Given Source file "C:\Source", destination folder "C:\Destination" exists
-    When I enter TC "Copy all text files from source to destination, copy wildcard all files", source file "C:\Source\*.*", destination file "C:\Destination", DoCreateDir ""
+    When I enter "Copy all text files from source to destination, copy wildcard all files", "C:\Source\*.*", "C:\Destination", ""
     And I click CopyFile
-    Then I should see number of files in destination equal to ones in source
+    Then I should see number of files in "C:\Source" equal to "C:\Destination"
 
   Scenario: Copy file successfully when destination folder is not available but DoCreateDir
     Given Source file "C:\Source", destination folder "C:\Destination" does not exist
-    When I enter TC "Copy file successfully when destination folder is not available but DoCreateDir", source file "C:\Source\LMC_ItemData_Big data.xml", destination file "C:\Destination", DoCreateDir "DoCreateDir"
+    When I enter "Copy file successfully when destination folder is not available but DoCreateDir", "C:\Source\LMC_ItemData_Big data.xml", "C:\Destination", "DoCreateDir"
     And I click CopyFile
     Then I should see the file exists "C:\Destination\LMC_ItemData_Big data.xml"
 
   Scenario: Copy file unsuccessfully when source file or destination folder does not exist
     Given Source file "C:\Source", destination folder "C:\Destination" does not exist
-    When I enter TC "Copy file unsuccessfully when destination folder is not available", source file "C:\Source\LMC_ItemData_Big data.xml", destination file "C:\Destination\LMC_ItemData_Big data.xml", DoCreateDir ""
+    When I enter "Copy file unsuccessfully when destination folder is not available", "C:\Source\LMC_ItemData_Big data.xml", "C:\Destination\LMC_ItemData_Big data.xml", ""
     And I click CopyFile
     Then I should not see the file exists "C:\Destination\LMC_ItemData_Big data.xml"
 
   Scenario: Copy file while it is open
     Given Source file "C:\Source", destination folder "C:\Destination" does not exist
     And The source file "C:\Source\LMC_ItemData_Big data.xml" is open
-    When I enter TC "Copy file successfully while it is open", source file "C:\Source\LMC_ItemData_Big data.xml", destination file "C:\Destination\LMC_ItemData_Big data.xml", DoCreateDir "DoCreateDir"
+    When I enter "Copy file successfully while it is open", "C:\Source\LMC_ItemData_Big data.xml", "C:\Destination\LMC_ItemData_Big data.xml", "DoCreateDir"
     And I click CopyFile
     Then I should see the file exists "C:\Destination\LMC_ItemData_Big data.xml"
 
   Scenario Outline: Call Copy File while arguments are empty
     Given Source file "<SourceFolder>", destination folder "<DestinationFolder>" exists
-    When I enter TC "<TC>", source file "<SourceFile>", destination file "<DestinationFile>", DoCreateDir "<DoCreateDir>"
+    When I enter "<TC>", "<SourceFile>", "<DestinationFile>", "<DoCreateDir>"
     And I click CopyFile
     Then I should see warning "<Warning>" in log
 

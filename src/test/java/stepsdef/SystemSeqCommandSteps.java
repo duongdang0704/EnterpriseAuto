@@ -60,15 +60,12 @@ public class SystemSeqCommandSteps {
 
     }
 
-    @When("I enter TC {string}, filename {string}, text {string}, DoCreateDir {string}")
-    public void i_enter_Filename_Text_DoCreateDir(String TC, String fileName, String text, String doCreateDir) {
-        testContext.scenarioContext.setContext("TC", TC);
-        testContext.scenarioContext.setContext("File Name", fileName);
-        testContext.scenarioContext.setContext("Content", text);
+    @When("I enter {string}, {string}, {string}, {string}")
+    public void i_enter_TC_Para1_Para2_Para3(String TC, String para1, String para2, String para3) {
         systemSeqCommandWindow.enterTC(TC);
-        systemSeqCommandWindow.enterPara1(fileName);
-        systemSeqCommandWindow.enterPara2(text);
-        systemSeqCommandWindow.enterPara3(doCreateDir);
+        systemSeqCommandWindow.enterPara1(para1);
+        systemSeqCommandWindow.enterPara2(para2);
+        systemSeqCommandWindow.enterPara3(para3);
 
     }
 
@@ -88,13 +85,6 @@ public class SystemSeqCommandSteps {
             e.printStackTrace();
             Assert.assertTrue(false);
         }
-        try {
-            File folder = new File(testContext.scenarioContext.getContext("Folder").toString());
-            FileUtils.deleteDirectory(folder);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
     }
 
@@ -111,7 +101,7 @@ public class SystemSeqCommandSteps {
             if (!folder.exists()) {
                 createDirectory(Path.of(folderPath));
             }
-            testContext.scenarioContext.setContext("Folder", folderPath);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -120,16 +110,20 @@ public class SystemSeqCommandSteps {
     @Given("Folder {string} is not available")
     public void folder_is_not_available(String folderPath) {
         File folder = new File(folderPath);
-        if (folder.exists()) {
-            folder.delete();
+        try {
+            if (folder.exists()) {
+
+                FileUtils.deleteDirectory(folder);
+            }
+        }catch (IOException ioException){
+            ioException.printStackTrace();
         }
-        testContext.scenarioContext.setContext("Folder", folderPath);
+
     }
 
     @Given("File {string} is available")
     public void file_is_available(String file) {
         String folder = file.substring(0, file.lastIndexOf("\\"));
-        testContext.scenarioContext.setContext("Folder", folder);
         if (!new File(file).exists()) {
             try {
                 if (!new File(folder).exists()) {
@@ -146,8 +140,6 @@ public class SystemSeqCommandSteps {
 
     @Given("Source file {string}, destination folder {string} does not exist")
     public void source_file_destination_folder_does_not_exist(String source, String destination) {
-        testContext.scenarioContext.setContext("Source Folder", source);
-        testContext.scenarioContext.setContext("Destination Folder", destination);
         File destinationFolder = new File(destination);
         File sourceFolder = new File(source);
         File testDataFolder = new File(AppConfig.TEST_DATA);
@@ -197,8 +189,6 @@ public class SystemSeqCommandSteps {
 
     @Given("Source file {string}, destination folder {string} exists")
     public void source_file_destination_folder_exists(String source, String destination) {
-        testContext.scenarioContext.setContext("Source Folder", source);
-        testContext.scenarioContext.setContext("Destination Folder", destination);
         File testDataFolder = new File(AppConfig.TEST_DATA);
         File sourceFolder = new File(source);
         File destinationFolder = new File(destination);
@@ -217,18 +207,6 @@ public class SystemSeqCommandSteps {
         }
     }
 
-    @When("I enter TC {string}, source file {string}, destination file {string}, DoCreateDir {string}")
-    public void i_enter_TC_source_file_destination_file_DoCreateDir(String TC, String sourceFile, String destinationFile, String doCreateDir) {
-        testContext.scenarioContext.setContext("TC", TC);
-        testContext.scenarioContext.setContext("Source File", sourceFile);
-        testContext.scenarioContext.setContext("Destination File", destinationFile);
-        systemSeqCommandWindow.enterTC(TC);
-        systemSeqCommandWindow.enterPara1(sourceFile);
-        systemSeqCommandWindow.enterPara2(destinationFile);
-        systemSeqCommandWindow.enterPara3(doCreateDir);
-
-    }
-
     @Then("I should see the file exists {string}")
     public void i_should_see_the_file_exists(String filePath){
         WaitFor.pause(3);
@@ -236,12 +214,11 @@ public class SystemSeqCommandSteps {
         Assert.assertTrue(new File(filePath).exists());
     }
 
-    @Then("I should see all text files exist")
-    public void i_should_see_all_text_files_exists(){
+    @Then("I should see all files match pattern {string} exist in {string}")
+    public void i_should_see_all_text_files_exists(String sourceFile, String destination){
         WaitFor.pause(3);
-        String sourceFilePath = testContext.scenarioContext.getContext("Source File").toString();
-        File destinationFolder = new File(testContext.scenarioContext.getContext("Destination Folder").toString());
-        String expectedExtension = sourceFilePath.substring(sourceFilePath.lastIndexOf(".") + 1);
+        File destinationFolder = new File(destination);
+        String expectedExtension = sourceFile.substring(sourceFile.lastIndexOf(".") + 1);
         String[] filePaths = destinationFolder.list();
         for (String filePath :
                 filePaths) {
@@ -250,11 +227,11 @@ public class SystemSeqCommandSteps {
         }
     }
 
-    @Then("I should see number of files in destination equal to ones in source")
-    public void i_should_see_number_of_files_in_destination_equal_to_ones_in_source(){
+    @Then("I should see number of files in {string} equal to {string}")
+    public void i_should_see_number_of_files_in_destination_equal_to_ones_in_source(String source, String destination){
         WaitFor.pause(3);
-        File sourceFolder = new File(testContext.scenarioContext.getContext("Source Folder").toString());
-        File destinationFolder = new File(testContext.scenarioContext.getContext("Destination Folder").toString());
+        File sourceFolder = new File(source);
+        File destinationFolder = new File(destination);
         int numOfSourceFiles = sourceFolder.listFiles().length;
         int numOfDestinationFiles = destinationFolder.listFiles().length;
         Assert.assertEquals(numOfSourceFiles, numOfDestinationFiles);

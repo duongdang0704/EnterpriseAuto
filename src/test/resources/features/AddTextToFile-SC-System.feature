@@ -1,4 +1,4 @@
-@Commands
+@SequenceCommands
 Feature: Sequence commands in System group
 
   Background: System sequence screen is open
@@ -6,7 +6,7 @@ Feature: Sequence commands in System group
 
   Scenario Outline: Add text to the new file in available directory successfully
     Given Folder "<Folder>" is available
-    When I enter TC "<TC>", filename "<Filename>", text "<Text>", DoCreateDir "<DoCreateDir>"
+    When I enter "<TC>", "<Filename>", "<Text>", "<DoCreateDir>"
     And I click AddToTextFile
     Then I should see text "<Text>" existing in the file "<Filename>"
 
@@ -17,7 +17,7 @@ Feature: Sequence commands in System group
 
   Scenario Outline: Add text to the new file in unavailable directory not successfully
     Given Folder "<Folder>" is not available
-    When I enter TC "<TC>", filename "<Filename>", text "<Text>", DoCreateDir "<DoCreateDir>"
+    When I enter "<TC>", "<Filename>", "<Text>", "<DoCreateDir>"
     And I click AddToTextFile
     Then I should not see the file exists "<Filename>"
     And I should see warning "<Warning>" in log
@@ -29,7 +29,7 @@ Feature: Sequence commands in System group
 
   Scenario Outline: Add text to the new file in unavailable directory, but DoCreateDir = true successfully
     Given Folder "<Folder>" is not available
-    When I enter TC "<TC>", filename "<Filename>", text "<Text>", DoCreateDir "<DoCreateDir>"
+    When I enter "<TC>", "<Filename>", "<Text>", "<DoCreateDir>"
     And I click AddToTextFile
     Then I should see text "<Text>" existing in the file "<Filename>"
 
@@ -42,7 +42,7 @@ Feature: Sequence commands in System group
 
   Scenario Outline: Add text to the existing file successfully
     Given File "<Filename>" is available
-    When I enter TC "<TC>", filename "<Filename>", text "<Text>", DoCreateDir "<DoCreateDir>"
+    When I enter "<TC>", "<Filename>", "<Text>", "<DoCreateDir>"
     And I click AddToTextFile
     Then I should see text "<Text>" existing in the file "<Filename>"
 
@@ -54,11 +54,11 @@ Feature: Sequence commands in System group
     | Add text to the file existing in network via disk map | Z:\Folder\FileName.txt  |  støtte De Forente Nasjoners arbeid for å opprettholde fred | |
 
   Scenario: Warning happens when calling AddToTextFile with empty argument values
-    When I enter TC "AddToTextFile while empty argument values", filename "", text "", DoCreateDir ""
+    When I enter "AddToTextFile while empty argument values", "", "", ""
     And I click AddToTextFile
     Then I should see warning "The file path  is invalid" in log
 
   Scenario: Warning happens when adding text to the existing file which is in Network having no authorization
-    When I enter TC "Add text to the existing file which is in Network when having no authorization", filename "\\192.168.2.54\Testing\Folder1\Filename.txt", text "Welcome to CodeIT", DoCreateDir ""
+    When I enter "Add text to the existing file which is in Network when having no authorization", "\\192.168.2.54\Testing\Folder1\Filename.txt", "Welcome to CodeIT", ""
     And I click AddToTextFile
     Then I should see warning "The file path \\192.168.2.54\Testing\Folder1\Filename.txt does not exist" in log
