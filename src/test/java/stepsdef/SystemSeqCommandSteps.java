@@ -55,6 +55,11 @@ public class SystemSeqCommandSteps {
         systemSeqCommandWindow.clickCopyFile();
     }
 
+    @And("I click DeleteFile")
+    public void i_click_DeleteFile() {
+        systemSeqCommandWindow.clickDeleteFile();
+    }
+
     @Then("I should see the correct result")
     public void i_should_see_the_correct_result() {
 
@@ -66,6 +71,13 @@ public class SystemSeqCommandSteps {
         systemSeqCommandWindow.enterPara1(para1);
         systemSeqCommandWindow.enterPara2(para2);
         systemSeqCommandWindow.enterPara3(para3);
+
+    }
+
+    @When("I enter {string}, {string}")
+    public void i_enter_TC_Para1(String TC, String para1) {
+        systemSeqCommandWindow.enterTC(TC);
+        systemSeqCommandWindow.enterPara1(para1);
 
     }
 
@@ -90,6 +102,7 @@ public class SystemSeqCommandSteps {
 
     @Then("I should not see the file exists {string}")
     public void i_should_not_see_the_file_exists(String filePath) {
+        WaitFor.pause(2);
         File file = new File(filePath);
         Assert.assertFalse(file.exists());
     }
@@ -137,6 +150,19 @@ public class SystemSeqCommandSteps {
         }
     }
 
+    @Given("Source {string} is available")
+    public void source_is_available(String source){
+        File sourceFolder = new File(source);
+        File testDataFolder = new File(AppConfig.TEST_DATA);
+        try {
+            if (sourceFolder.exists()) {
+                FileUtils.deleteDirectory(sourceFolder);
+            }
+            FileUtils.copyDirectory(testDataFolder, sourceFolder);
+        } catch (IOException ie) {
+            ie.printStackTrace();
+        }
+    }
 
     @Given("Source file {string}, destination folder {string} does not exist")
     public void source_file_destination_folder_does_not_exist(String source, String destination) {
@@ -215,7 +241,7 @@ public class SystemSeqCommandSteps {
     }
 
     @Then("I should see all files match pattern {string} exist in {string}")
-    public void i_should_see_all_text_files_exists(String sourceFile, String destination){
+    public void i_should_see_all_files_exists(String sourceFile, String destination){
         WaitFor.pause(3);
         File destinationFolder = new File(destination);
         String expectedExtension = sourceFile.substring(sourceFile.lastIndexOf(".") + 1);
@@ -227,6 +253,14 @@ public class SystemSeqCommandSteps {
         }
     }
 
+    @Then("I should see no files exist in {string}")
+    public void i_should_see_no_files_exists(String folderPath){
+        WaitFor.pause(3);
+        File folder = new File(folderPath);
+        String[] filePaths = folder.list();
+        Assert.assertEquals(0, filePaths.length);
+    }
+
     @Then("I should see number of files in {string} equal to {string}")
     public void i_should_see_number_of_files_in_destination_equal_to_ones_in_source(String source, String destination){
         WaitFor.pause(3);
@@ -235,5 +269,24 @@ public class SystemSeqCommandSteps {
         int numOfSourceFiles = sourceFolder.listFiles().length;
         int numOfDestinationFiles = destinationFolder.listFiles().length;
         Assert.assertEquals(numOfSourceFiles, numOfDestinationFiles);
+    }
+
+    @Then("I should see no files exist with extension {string}")
+    public void i_should_see_no_files_exist_with_extension(String filePath){
+        WaitFor.pause(3);
+        String folderPath = filePath.substring(0, filePath.lastIndexOf(".") - 1);
+        File folder = new File(folderPath);
+        String expectedExtension = filePath.substring(filePath.lastIndexOf(".") + 1);
+        String[] files = folder.list();
+        boolean result = true;
+        for (String file :
+                files) {
+            String actualExtension = filePath.substring(filePath.lastIndexOf(".") + 1);
+            if (actualExtension.equals(expectedExtension)){
+                result = false;
+                break;
+            }
+        }
+        Assert.assertTrue(result);
     }
 }
