@@ -12,6 +12,9 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import pages.OverviewWindow;
+import pages.SequenceMonitorDetailWindow;
+import pages.SequenceMonitorWindow;
 import pages.SystemSeqCommandWindow;
 import utilities.ApplicationLog;
 import utilities.WaitFor;
@@ -289,4 +292,12 @@ public class SystemSeqCommandSteps {
         }
         Assert.assertTrue(result);
     }
+
+    @Then("I should see sequence command {string} with status {string}")
+    public void i_should_see_sequence_command_with_status(String sequenceCommand, String status){
+        SequenceMonitorDetailWindow sequenceMonitorDetailWindow = new SequenceMonitorDetailWindow(driver);
+        String sequenceResult = sequenceMonitorDetailWindow.getSequenceResult(sequenceCommand);
+        Assert.assertEquals(sequenceResult, status);
+    }
+
 }
