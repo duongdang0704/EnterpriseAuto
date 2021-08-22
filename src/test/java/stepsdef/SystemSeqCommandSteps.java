@@ -243,6 +243,11 @@ public class SystemSeqCommandSteps {
         Assert.assertTrue(new File(filePath).exists());
     }
 
+    @And("I click MoveFile")
+    public void i_click_MoveFile(){
+        systemSeqCommandWindow.clickMoveFile();
+    }
+
     @Then("I should see all files match pattern {string} exist in {string}")
     public void i_should_see_all_files_exists(String sourceFile, String destination){
         WaitFor.pause(3);
@@ -262,6 +267,14 @@ public class SystemSeqCommandSteps {
         File folder = new File(folderPath);
         String[] filePaths = folder.list();
         Assert.assertEquals(0, filePaths.length);
+    }
+
+    @Then("I should see number of files in folder {int} {string}")
+    public void i_should_see_number_of_files_in_destination(int numberOfFiles, String folderPath){
+        WaitFor.pause(3);
+        File folder = new File(folderPath);
+        String[] filePaths = folder.list();
+        Assert.assertEquals(numberOfFiles, filePaths.length);
     }
 
     @Then("I should see number of files in {string} equal to {string}")
@@ -300,4 +313,14 @@ public class SystemSeqCommandSteps {
         Assert.assertEquals(sequenceResult, status);
     }
 
+    @And("I click FindFile")
+    public void i_click_FindFile(){
+        systemSeqCommandWindow.clickFindFile();
+    }
+
+    @And("I should see result {string}")
+    public void i_should_see_result(String result){
+        systemSeqCommandWindow.getResult();
+        Assert.assertEquals(result, systemSeqCommandWindow.getResult());
+    }
 }
