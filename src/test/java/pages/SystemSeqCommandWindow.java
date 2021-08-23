@@ -80,6 +80,11 @@ public class SystemSeqCommandWindow extends BaseWindow{
         click(moveFile_button);
     }
 
+    public void clickButtonByName(String name){
+        Locator button = new Locator(Locator.By.Name, name);
+        findElementByLocator(button).click();
+    }
+
     public void clickPlaySound(){
         click(playSound_button);
     }

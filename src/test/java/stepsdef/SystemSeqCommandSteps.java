@@ -77,6 +77,11 @@ public class SystemSeqCommandSteps {
 
     }
 
+    @And("I click button {string}")
+    public void i_click_button(String name){
+        systemSeqCommandWindow.clickButtonByName(name);
+    }
+
     @When("I enter {string}, {string}")
     public void i_enter_TC_Para1(String TC, String para1) {
         systemSeqCommandWindow.enterTC(TC);
@@ -323,4 +328,19 @@ public class SystemSeqCommandSteps {
         systemSeqCommandWindow.getResult();
         Assert.assertEquals(result, systemSeqCommandWindow.getResult());
     }
+
+    @When("I enter sequence parameters {string}, {string}, {string}, {string}")
+    public void i_enter_Para1_Para2_Para3_Para4( String para1, String para2, String para3, String para4) {
+        systemSeqCommandWindow.enterPara1(para1);
+        systemSeqCommandWindow.enterPara2(para2);
+        systemSeqCommandWindow.enterPara3(para3);
+        systemSeqCommandWindow.enterPara4(para4);
+    }
+
+    @When("I enter test cases {string}")
+    public void i_enter_TC_Para1_Para2_Para3_Para(String TC) {
+        systemSeqCommandWindow.enterTC(TC);
+
+    }
+
 }
